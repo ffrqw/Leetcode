@@ -1,0 +1,42 @@
+public class Solution {
+    public int searchInsert(int[] nums, int target) {
+        
+        if(nums.length==0)return 0;
+        // use binary search
+        // use a index = -1 to indicate not found
+        // if index found, return and wont run any longer
+        
+        int ans = helper(nums,0,nums.length-1,target);
+        return ans;
+    }
+    
+    public int helper(int[] nums, int s, int e, int target){
+        
+        // base case
+        // found
+        if(s>=e)                                    //!!!!!!!!!!!!!!!!
+        {                                           //!!!when case:[1,3],0
+            if(nums[s]==target)                     //!!!(s+e)/2-1 maybe -1
+                return s;                           //!!!so need to be s>=e
+            else if(nums[s]>target)
+                return s;
+            else return s+1;
+        }
+        
+        // not found
+        if(target>nums[(s+e)/2]&&target<nums[(s+e)/2+1])
+        return (s+e)/2+1;
+        
+        
+        if(target==nums[(s+e)/2])
+            return (s+e)/2;
+        if(target<nums[(s+e)/2])
+            return helper(nums, s,(s+e)/2-1,target);
+        if(target==nums[(s+e)/2+1])
+            return (s+e)/2+1;
+        if(target>nums[(s+e)/2])
+            return helper(nums,(s+e)/2+1,e,target);
+        
+        return 0;
+    }
+}
