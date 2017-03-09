@@ -1,0 +1,59 @@
+//Solution 1
+public class Solution {
+    public int climbStairs(int n) {
+        // time:O(N)
+        
+        // use array to store 1 to i th 
+        // steps' solutions
+        int []dp = new int[n+1];
+        
+        // base case
+        if(n>=0)
+        dp[0]=0;
+        if(n>=1)
+        dp[1]=1;
+        if(n>=2)
+        dp[2]=2;
+        
+        if(n<3)return dp[n];
+        for(int i =3;i<=n;i++)
+        {
+            dp[i] = dp[i-1]+dp[i-2];
+        }
+        return dp[n];
+    }
+}
+
+//Solution 2
+public class Solution {
+    public int climbStairs(int n) {
+        
+        HashMap<Integer,Integer> h = new HashMap<>();
+        h.put(0,0);
+        h.put(1,1);
+        h.put(2,2);
+        
+        return helper(n,h);
+    }
+    
+    public int helper(int n, HashMap<Integer,Integer> h){
+        
+        if(n<3)return n;
+        
+        int ans1;
+        int ans2;
+        
+        if(h.containsKey(n-1))
+            ans1 = h.get(n-1);
+        else ans1 = helper(n-1,h);
+        
+        if(h.containsKey(n-2))
+            ans2 = h.get(n-2);
+        else ans2 = helper(n-2,h);
+        
+        h.put(n,ans1+ans2);
+        
+        return ans1+ans2;
+        
+    }
+}
