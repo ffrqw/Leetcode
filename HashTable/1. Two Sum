@@ -1,0 +1,28 @@
+public class Solution {
+    public int[] twoSum(int[] nums, int target) {
+       // use a hashmap to record the counterpart
+       
+       // time:O(N)+O(1)(hash)
+       // space:O(N) for hashset
+        
+        int []ans = {0,0};
+        Map<Integer,Integer> hm = new HashMap<>();
+        
+        // for every num in nums, 
+        for(int i = 0;i<nums.length;i++)
+        {
+            if(hm.containsKey(nums[i]))
+            {
+                ans[0] = hm.get(nums[i]);
+                ans[1] = i;
+                break;
+            }
+            else
+            {
+                hm.put(target-nums[i],i);
+            }
+            
+        }
+        return ans;
+    }
+}
