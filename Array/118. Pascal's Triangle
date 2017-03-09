@@ -1,0 +1,34 @@
+public class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        if(numRows==0)return new ArrayList<List<Integer>>();
+        
+        // use 2 for loops
+        List<List<Integer>> allrows = new ArrayList<List<Integer>>();
+        
+        List<Integer> row = new ArrayList<>();
+        
+        row.add(0,1);
+        allrows.add(0,row);
+        
+        for(int i = 1;i<numRows;i++)
+        {
+            row = new ArrayList<>();
+            for(int j = 0;j<i+1;j++)
+            {
+                // when at the bound, equal to 1
+                if(j==0||j==i)
+                {
+                    row.add(j,1);
+                    continue;
+                }
+                
+                // in the middle
+                int op1 = (allrows.get(i-1)).get(j);
+                int op2 = (allrows.get(i-1)).get(j-1);
+                row.add(j,op1+op2);
+            }
+            allrows.add(i,row);
+        }
+        return allrows;
+    }
+}
