@@ -1,0 +1,31 @@
+public class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        
+        // ^^^^^^^
+        // some discussion about using arraylist and linkedlist
+        // ^^^^^^^
+        
+        // the tricky solution are as follow
+        
+        List<Integer> list = new ArrayList<>();
+        
+        if(rowIndex<0)return list;
+        
+        for(int i = 0;i<=rowIndex;i++)
+        {
+            list.add(0,1);          // add at the front
+            
+            for(int j = 1;j<list.size()-1;j++)
+            {
+                list.set(j,list.get(j)+list.get(j+1));          // !!!!!!!!!!! 
+            }                                                   // the index here need to be considered carefully
+        }
+        return list;
+    }
+    
+    // ^^^^^^^
+    // 1. using arraylist, add(0,1) O(N); set()&get() O(1)
+    // 2. using linkedlist, add(0,1) O(N); set()&get() O(N)
+    // so arraylist is better
+    // ^^^^^^^
+}
