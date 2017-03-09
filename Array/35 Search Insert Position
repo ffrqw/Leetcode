@@ -1,5 +1,8 @@
 public class Solution {
     public int searchInsert(int[] nums, int target) {
+    
+        // time: O(nlogn)
+        // no extra space
         
         if(nums.length==0)return 0;
         // use binary search
