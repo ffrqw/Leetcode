@@ -1,5 +1,9 @@
 public class Solution {
     public List<List<Integer>> generate(int numRows) {
+        // use last row to calc next row
+        
+        // time: O(N^2)
+        // space:O(N^2)
         if(numRows==0)return new ArrayList<List<Integer>>();
         
         // use 2 for loops
