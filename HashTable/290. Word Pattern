@@ -1,0 +1,39 @@
+public class Solution {
+    public boolean wordPattern(String pattern, String str) {
+        
+        // use a hashmap,
+        // if not contain key, but contain value, false
+        // pay attention to the mapping func
+        
+        // split the str
+        
+        // time: O(N)
+        // space: O(N)
+        
+        String[] sa = str.split(" ");
+        char [] pa = pattern.toCharArray();
+        
+        if(sa.length!=pa.length)return false;
+        
+        Map<Character, String> hm = new HashMap<>();
+        
+        for(int i =0;i<pa.length;i++)
+        {
+            if(!hm.containsKey(pa[i]))
+            {
+                if(hm.containsValue(sa[i]))
+                    return false;
+                hm.put(pa[i],sa[i]);
+                //System.out.println(pa[i]+" "+sa[i]);
+            }
+            else
+            {//System.out.println(pa[i]+" "+sa[i]+" "+hm.get(pa[i]));
+                if(!sa[i].equals(hm.get(pa[i])))                        //!!!!!!!!!!!!!!String1==String2!!!XXXXXXXXXXXXXX WRONG!!!!
+                    return false;                                       //!!!! should use .equals()
+            
+            }
+        }
+        return true;
+        
+    }
+}
