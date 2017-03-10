@@ -1,0 +1,34 @@
+public class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        
+        // compare each char in s and t
+        // if charAt s is in hashmap, convert it to value
+        // and compare it to charAt t
+        
+        // time: O(N)*O(1)// hash op
+        // space:O(2N)
+        
+        if(s.length()!=t.length())return false;
+        
+        Map<Character, Character> hm = new HashMap<>();
+        
+        for(int i = 0;i<s.length();i++)
+        {
+            char sch = s.charAt(i);
+            char tch = t.charAt(i);
+            
+            if(!hm.containsKey(sch))    
+            {                                                   // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if(hm.containsValue(tch))                       // !!!!!!!!!! pay attention to the mapping relation
+                    return false;
+                hm.put(sch,tch);
+            }
+            else
+            {
+                if(hm.get(sch)!=tch)
+                    return false;
+            }
+        }
+        return true;
+    }
+}
