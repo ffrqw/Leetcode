@@ -1,0 +1,45 @@
+public class Solution {
+    public boolean isHappy(int n) {
+        // the loop stops when 
+        // it appears repeat number
+        // so we need to use a hashtable
+        // to record the appeared numbers
+        
+        // time:O(logn)
+        // space:equal to time, because every time
+        // we calc a new num, hashtable need to 
+        // store that
+        
+        Set<Integer> hs = new HashSet<>();
+        
+        // use a helper to pass hashtable
+        
+        return helper(n,hs);
+    }
+    
+    public boolean helper(int n, Set<Integer> hs){
+        
+        // base case
+        if(n==1)
+            return true;
+        
+        if(hs.contains(n))
+            return false;
+            
+        // simplifier
+        hs.add(n);
+
+        int k =0;      // use k to store each digit
+        
+        
+        while(n!=0)
+        {
+            int dg = n%10;
+            k += (dg*dg);
+            n = n/10;
+        }
+
+        
+        return helper(k,hs);
+    }
+}
