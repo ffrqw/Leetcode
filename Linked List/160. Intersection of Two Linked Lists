@@ -1,0 +1,77 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        
+        // first get the sizes of the two list O(2N)
+        // let the bigger one go first until the size is the same
+        // Go through two list, find if the same node
+        
+        // time:O(N) // find the size, O(N)+O(N); go through 2 list simutanously O(N)
+        // space:O(1)
+        
+        int sizeA = 0;
+        int sizeB = 0;
+        
+        ListNode pa = headA;
+        ListNode pb = headB;
+        
+        while(pa!=null)
+        {
+            sizeA++;
+            pa = pa.next;
+        }
+        while(pb!=null)
+        {
+            sizeB++;
+            pb = pb.next;
+        }
+        
+        ListNode ll;
+        ListNode sl;
+        int bs = 0;
+        int ss = 0;
+        
+        if(sizeA>sizeB)
+        {
+            ll = headA;
+            sl = headB;
+            bs = sizeA;
+            ss = sizeB;
+        }
+        else
+        {
+            ll = headB;
+            sl = headA;
+            ss = sizeA;
+            bs = sizeB;
+        }
+        
+        // ll go first until size the same
+        while(bs>ss)
+        {
+            ll = ll.next;
+            bs--;
+        }
+        
+        // now begin compare
+        
+        while(sl!=null)
+        {
+            if(sl==ll)
+                return sl;
+            sl=sl.next;
+            ll = ll.next;
+        }
+        return null;   
+    }
+}
