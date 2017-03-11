@@ -1,0 +1,26 @@
+public class Solution {
+    public boolean canPermutePalindrome(String s) {
+        // understand the question
+        // just a permutation of the string will fulfill it
+        
+        // so use a hash set, add and move, at last, remain at most 1
+        
+        // time:O(N)
+        // space:O(1)// 26 total chars
+        
+        Set<Character> hs = new HashSet<>();
+        
+        char []sc = s.toCharArray();
+        
+        for(char ch:sc)
+        {
+            if(!hs.contains(ch))
+                hs.add(ch);
+            else
+                hs.remove(ch);
+        }
+        if(hs.size()>1)
+            return false;
+        return true;
+    }
+}
