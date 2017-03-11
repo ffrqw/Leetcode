@@ -1,0 +1,19 @@
+public class Solution {
+    public int reverse(int x) {
+        // %10 get tail
+        // put it in new int
+        
+        long rx = 0;
+        
+        while(x!=0)
+        {
+            rx = rx*10+x%10;
+            
+            if(rx>Integer.MAX_VALUE||rx<Integer.MIN_VALUE)          //!!!!!!!!!!!!!!!!!Integer.MAX_VALUE
+                return 0;
+                
+            x = x/10;
+        }
+        return (int)rx;
+    }
+}
