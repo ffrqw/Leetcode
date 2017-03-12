@@ -1,0 +1,24 @@
+public class Solution {
+    public boolean isUgly(int num) {
+        // only include means, if i divide max 2,
+        // max 3 and max 5, it should be 1
+        
+        // time: logn
+        // no space
+        
+        if(num==0)return false;
+        
+        // divde max 5    
+        while(num%5==0)
+            num=num/5;
+        // divde max 3    
+        while(num%3==0)
+            num=num/3;
+        // divde max 2
+        while(num%2==0)
+            num=num/2;
+            
+        if(num==1)return true;
+        return false;
+    }
+}
