@@ -1,0 +1,20 @@
+public class Solution {
+    public String reverseString(String s) {
+        
+        // time: O(N)
+        // space: O(N)
+        if(s.length()==0)return "";
+        
+        char[] sch=s.toCharArray();
+        int j = sch.length-1;
+        for(int i = 0;i<sch.length/2;i++)
+        {
+            char tmp = sch[j];
+
+            sch[j] = sch[i];
+            sch[i] = tmp;
+            j--;
+        }
+        return new String(sch);
+    }
+}
