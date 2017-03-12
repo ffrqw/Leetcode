@@ -1,0 +1,25 @@
+public class Solution {
+    public String convertToTitle(int n) {
+        // %26
+        // with inspection
+        // every time repeat the while,
+        // n-1
+        // so A=0
+        // B=1
+        
+        // time: logn
+        // no space
+    
+        int k = 0;
+        String ans = "";
+        
+        while(--n>=0)
+        {
+            k = n%26;
+            ans = (char)('A'+k) + ans;
+            n = n/26;
+        }
+        return ans;
+        
+    }
+}
