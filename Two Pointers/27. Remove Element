@@ -1,0 +1,33 @@
+// similar to 283. move zeroes
+
+public class Solution {
+    public int removeElement(int[] nums, int val) {
+        
+        // use 2 pointers
+        // p as the pointer comparing right now
+        // np indicate the new array's pointer
+        
+        // !! p is always faster than np
+        
+        int p = 0,
+            np = 0;
+        
+        for(;p<nums.length;p++)
+        {
+            // if nums[p] is not val
+            // the new array should append it
+            
+            if(nums[p]!=val)
+            {
+                nums[np] = nums[p];
+                np++;
+            }
+            
+            // if num[p] is val
+            // the new array should not append it
+            // thus do nothing
+        }
+        
+        return np;  // have already np++!!!!!!!!!!!
+    }
+}
