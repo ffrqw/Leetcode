@@ -1,0 +1,24 @@
+public class Solution {
+    public int removeDuplicates(int[] nums) {
+        // use a hashset to store the appeared nums
+        HashSet<Integer> hs = new HashSet<>();
+        
+        // every time meet the nums in hashset remove it 
+        // with np and p
+        
+        int p = 0,
+            np = 0;
+        for(;p<nums.length;p++)
+        {
+            // when not duplicate, 
+            // add to "new array"
+            if(!hs.contains(nums[p]))
+            {
+                nums[np]=nums[p];
+                hs.add(nums[p]);
+                np++;
+            }
+        }
+        return np;          // cuz np++
+    }
+}
