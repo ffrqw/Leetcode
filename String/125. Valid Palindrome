@@ -1,0 +1,37 @@
+// !! Cap!!!!
+// isLetterOrDigit()
+
+public class Solution {
+    public boolean isPalindrome(String s) {
+        // use 2 pointers, 1 front, 1 back
+        // move towards middle
+        //      until is digit or alphabet
+        //      cmp
+        // until f>=b
+        
+        // time: n
+        // no space
+        
+        if(s.length()==0)return true;
+        
+        int f = 0,
+            b = s.length()-1;
+        while(f<b)
+        {
+            while(f<b&&!Character.isLetterOrDigit(s.charAt(f)))
+                f++;
+             
+            while(b>f&&!Character.isLetterOrDigit(s.charAt(b)))
+                b--;  
+            
+            if(Character.toLowerCase(s.charAt(f))!=Character.toLowerCase(s.charAt(b))) return false;
+            
+            // go to next char
+            f++;
+            b--;
+        }
+        
+        // when length is 1, true
+        return true;
+    }
+}
