@@ -1,0 +1,29 @@
+public class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        // notice that the total length is m+n
+        // so we can do it from back to the front
+        // use a pointer p to point to the new nums1's focusing tail
+        // use p1 and p2 to point to the old nums1 and nums2's 
+        // processing tail
+        
+        int p = m+n-1,
+            p1 = m-1,
+            p2 = n-1;
+        
+        while(p2>=0)            // the exit condition
+        {
+            // compare nums1[p1] with nums2[p2]
+            if(p1>=0&&nums1[p1]>nums2[p2])
+            {
+                nums1[p]=nums1[p1];
+                p1--;
+            }
+            else
+            {
+               nums1[p]=nums2[p2];
+               p2--;
+            }
+            p--;
+        }
+    }
+}
