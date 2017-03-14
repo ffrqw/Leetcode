@@ -1,0 +1,39 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+ 
+ // runner and walker pointer
+ 
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        
+        // at first, I didn't get the point of the question
+        // cycle means loop list
+        
+        // use walker and runner pointers
+        // if cycle, they meet
+        
+        // time: O(N)
+        // space:O(1)
+        
+        ListNode walker = head;
+        ListNode runner = head;
+        
+        while(runner!=null&&runner.next!=null)
+        {
+            walker = walker.next;
+            runner = runner.next.next;
+            if(walker==runner)
+                return true;
+        }
+        return false;
+    }
+}
