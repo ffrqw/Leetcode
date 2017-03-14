@@ -1,0 +1,54 @@
+public class Solution {
+    public String reverseVowels(String s) {
+        // use 2 pointers, one front, one back
+        // when f meets vowels, stop, wait until b meet vowels
+        // then swap
+        // if f meets b, stop
+        
+        // vowels: a 0, e 4, i 8, o 14, u 20
+        
+        // time: n
+        // space: n
+        
+        Set<Character> hs = new HashSet<>();
+        
+        hs.add('a');
+        hs.add('A');
+        hs.add('e');
+        hs.add('E');
+        hs.add('i');
+        hs.add('I');
+        hs.add('o');
+        hs.add('O');
+        hs.add('u');
+        hs.add('U');
+        
+        
+        if(s.length()==0)return s;
+        
+        int f = 0,
+            b = s.length()-1;
+        
+        char[] sch = s.toCharArray();
+        
+        while(b>f)
+        {
+            while(f<b&&!hs.contains(sch[f]))
+                f++;
+            while(b>f&&!hs.contains(sch[b]))
+                b--;
+                
+            //System.out.println();
+            //System.out.println(f);
+            //System.out.println(b);
+            char tmp = sch[f];
+            sch[f] = sch[b];
+            sch[b] = tmp;
+            
+            f++;
+            b--;
+        }
+        
+        return new String(sch);
+    }
+}
