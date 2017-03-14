@@ -1,0 +1,30 @@
+public class Solution {
+    void moveZeroes(int [] nums){
+        // classic!
+        
+        // use 2 pointer,
+        // one begin, as the new array pointer, one p old array pointer
+        // don't need to consider the val between begin and p
+        // only p matters
+        // until p to the end
+        // then set 0 for the rest.
+        
+        // time: n
+        // no space
+        
+        int begin = 0,
+            p = 0;
+        
+        for(;p<nums.length;p++)
+        {
+            if(nums[p]!=0)nums[begin++]=nums[p];
+        }
+        
+        // set 0
+        while(begin<nums.length)
+        {
+            nums[begin++]=0;
+        }
+        
+    }
+}
