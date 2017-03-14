@@ -1,0 +1,46 @@
+// the order of the intersection part is unknown
+// so use hashmap to store num
+
+public class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        
+        // use a hashmap to store nums1
+        // use an arraylist to store result
+        
+        // time:O(N1)//store nums1 + O(N2)// to compare + toArray()
+        // space: O(N1+N2)
+        
+        Map<Integer, Integer> hm = new HashMap<>();
+        List<Integer> res = new ArrayList<>();
+        
+        for(int num:nums1)
+        {
+            if(hm.containsKey(num))
+            {
+                hm.put(num, hm.get(num) + 1);
+            }
+            else
+                hm.put(num,1);
+        }
+        
+        for(int num:nums2)
+        {
+            if(hm.containsKey(num))
+            {
+                res.add(num);
+                if(hm.get(num)==1)
+                    hm.remove(num);
+                else
+                    hm.put(num,hm.get(num)-1);
+            }
+        }
+        int []ans = new int[res.size()];
+        
+        for(int i = 0;i<res.size();i++)
+        {
+            ans[i] = res.get(i);
+        }
+        
+        return ans;
+    }
+}
