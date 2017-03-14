@@ -1,0 +1,61 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isPalindrome(ListNode head) {
+        
+        // basic idea is to fold the list in the mid
+        // so we need to find the mid node of the list
+        // use slow and fast pointer
+        // !!!!!!!!!!if it's odd size, s move to next !!!!!!!!! try an eg
+        // then reverse s
+        
+        // time:O(N)
+        // space: see the discussion
+        
+        if(head==null)return true;
+        if(head.next==null)return true;
+        
+        ListNode f = head,
+                 s = head;
+        
+        while(f!=null&&f.next!=null)
+        {
+            f = f.next.next;
+            s = s.next;
+        }
+        if(f!=null)
+            s = s.next;
+        
+        // now s is the head of part 2
+        f = head;
+        
+        // reverse s
+        ListNode prevN = null;
+        ListNode cur = s;
+        ListNode nextN = null;
+        while(cur!=null)
+        {
+            nextN = cur.next;
+            cur.next = prevN;
+            prevN = cur;
+            cur = nextN;
+        }
+        s = prevN;
+        
+        // check
+        while(s!=null)
+        {
+            if(s.val!=f.val)
+                return false;
+            s = s.next;
+            f = f.next;
+        }
+        return true;
+    }
+}
