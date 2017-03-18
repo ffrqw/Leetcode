@@ -1,0 +1,28 @@
+public class Solution {
+    public int minCost(int[][] cost) {
+        // cost_total[i-1][0] represent the max when
+        // the last house paint in color 0
+        
+        // so the cost_total[i][0] = max(cost[i-1][1],cost[i-1][2])+cost[i][0]
+        // we can use costs as cost_total
+        
+        // time: n
+        // no space
+        
+        
+        int size = cost.length;
+        if(size==0)return 0;
+        // base case
+        // when i = 1, costs remain the same;
+        
+        for(int i = 1;i<size;i++)
+        {
+            cost[i][0] = Math.min(cost[i-1][1],cost[i-1][2]) +cost[i][0];
+            cost[i][1] = Math.min(cost[i-1][0],cost[i-1][2]) +cost[i][1];
+            cost[i][2] = Math.min(cost[i-1][0],cost[i-1][1]) +cost[i][2];
+        }
+        int min = Math.min(cost[size-1][0],cost[size-1][1]);
+        min = Math.min(min,cost[size-1][2]);
+        return min;
+    }
+}
