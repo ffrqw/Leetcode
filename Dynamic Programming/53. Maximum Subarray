@@ -1,0 +1,22 @@
+public class Solution {
+    public int maxSubArray(int[] nums) {
+        // Kadane Algr
+        // maxcur, maxSofar
+        
+        // time: n
+        // space: 1
+        
+        if(nums.length==0)return 0;
+        // use Kadane Algr
+        int maxcur=nums[0],
+            maxSofar=maxcur;
+        
+        for(int i =1;i<nums.length;i++)
+        {
+            maxcur=Math.max(nums[i],maxcur+nums[i]);
+            maxSofar=Math.max(maxcur,maxSofar);
+        }
+        return maxSofar;
+        
+    }
+}
