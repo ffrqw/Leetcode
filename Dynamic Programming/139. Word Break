@@ -1,0 +1,26 @@
+public class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        // can't use p, cuz you don't know if the 
+        // further 0-j is also in the dict
+        // eg.
+        // "aaaaa"
+        // dict=["a","aaaaa"]
+        
+        boolean[] f = new boolean[s.length() + 1];
+        
+        f[0] = true;
+        // int p = 0;
+        for(int i=1; i <= s.length(); i++){
+            for(int j=0; j <= i; j++){
+                if(f[j] && wordDict.contains(s.substring(j, i))){
+                    // substring
+                    f[i] = true;
+                    // p = i;
+                    break;
+                }
+            }
+        }
+        
+        return f[s.length()];
+    }
+}
