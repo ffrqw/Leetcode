@@ -1,0 +1,36 @@
+public class NumArray {
+
+    // use a pointer to indicate 
+    // calc to what index
+    
+    public NumArray(int[] nums) {
+        arr = nums;
+        dp = new int[nums.length];
+        p = 0;
+        if(nums.length>0)
+            dp[0] = arr[0];
+    }
+    
+    public int sumRange(int i, int j) {
+        if(j<=p)
+            return dp[j]-dp[i]+arr[i];
+        
+        for(int k = p+1;k<=j;k++)
+        {
+            dp[k] = dp[k-1]+arr[k];
+            //System.out.println(k+" "+dp[k]);
+        }
+        p = j;
+        return dp[j]-dp[i]+arr[i];
+    }
+    
+    private int []arr;
+            int []dp;
+            int p;
+}
+
+/**
+ * Your NumArray object will be instantiated and called as such:
+ * NumArray obj = new NumArray(nums);
+ * int param_1 = obj.sumRange(i,j);
+ */
