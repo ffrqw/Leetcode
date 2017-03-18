@@ -1,0 +1,7 @@
+public class Solution {
+    public int hammingDistance(int x, int y) {
+        
+        // bitcount is the same as n = n&(n-1), cnt++
+        return Integer.bitCount(x^y);
+    }
+}
