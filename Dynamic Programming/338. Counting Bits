@@ -1,0 +1,32 @@
+public class Solution {
+    public int[] countBits(int num) {
+        // for every 2^n number, within the
+        // 2^n, increasing by 1
+        // outside 2^n, 2^n+1, go back to 1
+        
+        // Math.pow(2,n)
+        
+        // time: n
+        // space: n
+        
+        int[] dp = new int[num+1];
+        
+        dp[0]=0;
+        
+        int i = 0;
+        for(;Math.pow(2,i)<=num;i++)
+        {
+            dp[(int)Math.pow(2,i)] = 1;
+            
+            // the index in dp for each 2^n
+            int m = (int)Math.pow(2,i);
+            for(int j =(int)Math.pow(2,i)+1;j<Math.pow(2,i+1)&&j<=num;j++)
+            {   
+                // in the 2^n & 2^(n+1) dp[j] is increase by 1
+                dp[j]=dp[j-m]+1;
+            }
+        }
+    
+        return dp;
+    }
+}
