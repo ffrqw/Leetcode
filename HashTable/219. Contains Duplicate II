@@ -1,0 +1,34 @@
+public class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        // use a hashmap
+        // <V,K>
+        
+        // time: n
+        // space: n
+        Map<Integer,Integer> hm = new HashMap<>();
+        
+        // traverse every num 
+        // if not in hm, add it
+        // if in hm, get the key to see if within k
+        boolean flag = false;
+        for(int i = 0;i<nums.length;i++)
+        {
+            if(!hm.containsKey(nums[i]))
+            {
+                hm.put(nums[i],i);
+            }
+            else
+            {
+                if(Math.abs(i-hm.get(nums[i]))<=k)
+                {
+                    flag=true;
+                    break;
+                }
+                else
+                    hm.replace(nums[i],i);
+                
+            }
+        }
+        return flag;
+    }
+}
