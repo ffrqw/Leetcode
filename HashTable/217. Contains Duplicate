@@ -1,0 +1,35 @@
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        // use the sort, may be merge sort
+        
+        // time: nlogn+n
+        // no space
+        
+        Arrays.sort(nums);
+        for(int ind = 1; ind < nums.length; ind++) {
+            if(nums[ind] == nums[ind - 1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+public class Solution {
+    public boolean containsDuplicate(int[] nums) {
+        // use a hashset
+        
+        // time: n
+        // space: n
+        
+        Set<Integer> hs = new HashSet<>();
+        for(int num: nums)
+        {
+            if(hs.contains(num))
+                return true;
+            else
+                hs.add(num);
+        }
+        return false;
+    }
+}
