@@ -4,13 +4,11 @@ public class Solution {
         
         // time: n
         // no space
-        int num1=nums[0];
-        int ans = num1;
+        int ans = nums[0];
         for(int i=1;i<nums.length;i++)
         {
             int num2 = nums[i];
-            ans = num1^num2;
-            num1=num2;
+            ans = ans^num2;
         }
         return ans;
     }
