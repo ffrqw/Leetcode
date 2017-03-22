@@ -1,0 +1,40 @@
+public class Solution {
+    public int islandPerimeter(int[][] grid) {
+    // use the brute is even faster than use a hashmap
+    // time : n*n
+    // no space
+        int peri = 0;
+        int width = grid.length;
+        int height = grid[0].length;
+
+        // read all data in the grid
+        // if find 1, perimeter+4
+        // look up the near 4 pos(to check if it's boundary)
+        // to check if it's 1, perimeter--
+
+        for(int i = 0; i<width; i++){
+            for(int j = 0; j<height; j++){
+                if(grid[i][j]==1){
+                    peri+=4;
+
+                    // look up the near 4 pos(to check if it's boundary)
+                    // to check if it's 1, perimeter--
+                                                                                    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                                                                    //^^ in fact, two direction is enough
+                                                                                    //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                    // up
+                    if(j>0)
+                        if(grid[i][j-1]==1)
+                            peri-=2;
+
+                    // left
+                    if(i>0)
+                        if(grid[i-1][j]==1)
+                            peri-=2;
+
+                }
+            }
+        }
+        return peri;
+    }
+}
