@@ -1,0 +1,23 @@
+public class Solution {
+    public int singleNumber(int[] nums) {
+        // put every num in a hashset
+        // remove if it exist
+        // return the one remaining
+        
+        // time: n
+        // space: n
+        HashSet<Integer> twice = new HashSet<>();
+        int res=0;
+        for(int i = 0; i<nums.length; i++){
+            if(twice.contains(nums[i]))
+                twice.remove(nums[i]);
+            else
+                twice.add(nums[i]);
+        }
+        Iterator it = twice.iterator();
+        res = (int)it.next();
+        return res;
+    }
+}
+
+//a^a=0 and ^ is commutative
