@@ -1,0 +1,23 @@
+public class Solution {
+    public int titleToNumber(String s) {
+       
+       // change from decimal to 26 cimal
+       // s.charArray
+       // from back to front %26
+       
+       // in fact, every char minus 1
+       
+       // time: s.length
+       // no space
+       
+       char [] sch = s.toCharArray();
+       int ans = 0;
+       
+       for(int i = 0;i<sch.length;i++)
+       {
+           int num = sch[i]-'A'+1;
+           ans = ans*26+num;
+       }
+       return ans;
+    }
+}
