@@ -1,0 +1,21 @@
+public class Solution {
+    public int addDigits(int num) {
+        // recursion
+        // for every num, add all the digit
+        
+        // time:?
+        // no space
+        if(num<10)
+            return num;
+        int k = 0;
+        
+        // for every num, add all the digit
+        while(num!=0)
+        {
+            k+=(num%10);
+            num = num/10;
+        }
+        
+        return addDigits(k);
+    }
+}
