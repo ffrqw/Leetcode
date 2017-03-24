@@ -1,0 +1,44 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+        // use recursion,
+        // use the mid point of the array as the root
+        // split the array into 2 part,
+        // change the 2 part into 2 BST separately as 2 children
+        
+        // time: n???
+        
+        if(nums.length==0)return null;
+        
+        // deposit one num at a TreeNode at a time
+        
+        // we divide and conquer the nums
+        
+        TreeNode root = dfs(nums,0, nums.length-1);
+        return root;
+    }
+    
+    public TreeNode dfs(int[] nums,int s, int e){
+        
+        // base case
+        if(e<s) return null;
+        if(e==s) return new TreeNode(nums[s]);
+        
+        // simplifier
+        TreeNode root = new TreeNode(nums[(e+s)/2]);
+        if(((e+s)/2-1)>=s)
+            root.left = dfs(nums,s,(e+s)/2-1);
+        if(((e+s)/2+1)<=e)
+            root.right = dfs(nums,(e+s)/2+1,e);
+        
+        return root;
+    }
+}
