@@ -1,0 +1,46 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        
+        // time: n
+        // space:n
+        
+        // record the cur dep
+        int dep = 0,
+        // record the max dep
+            maxdep = 0;
+        maxdep = dfs(root, dep, maxdep);
+        return maxdep;
+    }
+    
+    public int dfs(TreeNode root,int dep, int maxdep){
+        
+        if(root == null) return maxdep;
+        
+        // if root is leafnode
+        if(root.left==null&&root.right==null)
+        {
+            return maxdep>(dep+1)?maxdep:(dep+1);
+        }
+        
+        // simplifier
+        // go to left and right child
+        if(root.left!=null)
+        {
+            maxdep=dfs(root.left,dep+1,maxdep);
+        }
+        if(root.right!=null)
+        {
+            maxdep=dfs(root.right,dep+1,maxdep);
+        }
+        return maxdep;
+    }
+}
