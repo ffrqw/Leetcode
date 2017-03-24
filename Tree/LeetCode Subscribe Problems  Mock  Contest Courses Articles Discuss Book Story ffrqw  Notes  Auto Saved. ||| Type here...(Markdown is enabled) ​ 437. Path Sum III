@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        // SEARCH FOR EACH NODE AS ROOT!!
+        
+        // NEED TO BE REDO, CUZ OPTIMIZE!!
+        
+        // preorder traverse, then pass the cursum
+        // recursion all child
+        
+        // time: n^2
+        // space: 1
+        if(root==null)return 0;
+        
+        // start at the root+start at root.left + start at root.right
+        return sumUp(root,sum)+pathSum(root.left,sum)+pathSum(root.right,sum);
+        
+    }
+    
+    // traverse based on 1 root
+    public int sumUp(TreeNode root, int sum){
+        int res = 0;
+        // base case;
+        if(root==null)return 0;
+        if(root.val==sum)res= 1;
+        
+        // simplifier
+        return res+sumUp(root.left,sum-root.val)+sumUp(root.right,sum-root.val);
+    }
+}
