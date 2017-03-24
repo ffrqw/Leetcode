@@ -1,0 +1,79 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+public class Solution {
+    int max = 0;
+    int tmpcnt=0;
+    int curval = 0;
+    public int[] findMode(TreeNode root) {
+        // KEY:GLOBAL VARIABLE!!!!!!!!!!!!
+        
+        // inorder traverse the tree, so that we can get
+        // the ASC premutation. use a tmpcnt to cnt the current val
+        // a max to store the maxcnt so far.
+        // if cur is the same as last one, tmpcnt++,
+        //      then if tmpcnt=max, add to res list
+        //           if tmpcnt>max, renew a res list and add it. renew max
+        // if cur not the same as last one, tmpcnt=1
+        
+        // use a helper to recursion
+        
+        // time : n
+        // space: O(n)
+        
+        if(root==null)return new int[0];
+        List<Integer> res = new LinkedList<>();
+        
+        curval = root.val;
+        res = helper(root, res);
+        int[] ans = new int[res.size()];
+        for(int i = 0;i<res.size();i++)
+        {
+            ans[i] = res.get(i);
+        }
+        return ans;
+    }
+    
+    public List<Integer> helper(TreeNode root, List<Integer> res){
+        // base case
+        if(root==null)return res;
+        
+        res = helper(root.left,res);
+        /*
+        System.out.println();
+        System.out.println(curval);
+        System.out.println(tmpcnt);
+        System.out.println(root.val);*/
+        
+        if(root.val==curval)
+        {
+            
+            tmpcnt++;
+        }
+        else
+        {
+            tmpcnt=1;
+            curval = root.val;
+        }
+        if(tmpcnt>max)
+            {
+                
+                res = new LinkedList<>();
+                max = tmpcnt;
+                res.add(root.val);
+            }
+        else if(tmpcnt==max)
+            res.add(root.val);
+        
+        res = helper(root.right,res);
+        return res;
+        
+    }
+}
