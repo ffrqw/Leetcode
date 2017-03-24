@@ -1,0 +1,26 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public int closestValue(TreeNode root, double target) {
+        // use recursion
+        // compare root and closestValue from its 'proper child'
+        
+        // check if root's proper child is null, return root
+        // (cause you are guaranteed to have at least one node)
+        TreeNode properChild = root.val>target? root.left:root.right;
+        if(properChild==null)return root.val;
+        
+        int b = closestValue(properChild,target);
+        
+        // compare root.val with b
+        return Math.abs(root.val-target)>Math.abs(b-target)? b:root.val;
+        
+    }
+}
