@@ -1,0 +1,46 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<Integer> postorderTraversal(TreeNode root) {
+        /*
+            if node is not null, push node, node = node.left
+            if node is null, pop the stack into node, check right visited or not
+                if right visited or null, visit node, pop the stack.
+                if right not visited, push right
+        */
+        List<Integer> list = new LinkedList<>();
+        Stack<TreeNode> stack = new Stack<>();
+        
+        if(root==null)return list;
+        
+        // use a TreeNode, visited, to represent the last node visited
+        TreeNode visited = null;
+        while(root!=null||!stack.isEmpty())
+        {
+            if(root!=null)
+            {
+                stack.push(root);
+                root = root.left;
+            }else{
+                TreeNode peak = stack.peek();
+                if(peak.right!=null&&visited!=peak.right)
+                    root = peak.right;
+                else{
+                    // visit the node
+                    list.add(peak.val);
+                    visited = peak;
+                    stack.pop();
+                }
+            }
+        }
+        return list;
+    }
+
+}
