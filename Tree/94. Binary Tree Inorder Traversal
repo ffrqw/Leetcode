@@ -1,0 +1,26 @@
+public class Solution {
+    public List<Integer> inorderTraversal(TreeNode node){
+	    /* if node is not null, push it into stack, node = node.left
+	        if node is null, pop the stack, visit it, then node = node.right
+	    */
+	    List<Integer> list = new LinkedList<>();
+	    Stack<TreeNode> stack = new Stack<>();
+	    
+	    while(node!=null||!stack.isEmpty())
+	    {
+	        if(node!=null)
+	        {
+	            stack.push(node);
+	            node = node.left;
+	        }
+	        else
+	        {
+	            node = stack.pop();
+	            list.add(node.val);
+	            node = node.right;
+	        }
+	    }
+	    return list;
+	}
+
+}
