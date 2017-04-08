@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        // post is similar to preorder
+        // cmp to preorder, the last one of the post order is the root
+        // we also need to divide the inorder into 2 parts
+        // divide and conquer
+        
+        // time: ?
+        // space 1
+        
+        if(inorder.length==0||inorder.length!=postorder.length) return null;
+        return helper(inorder,0,inorder.length-1,postorder,0,postorder.length-1);
+    }
+    public TreeNode helper(int[] inorder, int is, int ie, int[] postorder, int ps, int pe){
+        
+        // base case
+        if(is>ie) return null;
+        
+        // simplifier
+        
+        // find root
+        int root_val = postorder[pe];
+        TreeNode root = new TreeNode(root_val);
+        
+        // find root_val in inoder[]
+        int i = is;
+        for(;i<=ie;i++)
+        {
+            if(inorder[i]==root_val) break;
+        }
+        // length of the child tree
+        int ll = i-is;
+        int lr = ie - i - 1;
+        
+        root.left = helper(inorder, is, i-1, postorder, ps, ps+ll-1);
+        root.right = helper(inorder, i+1, ie, postorder, ps+ll, pe-1);
+        
+        return root;
+    }
+}
