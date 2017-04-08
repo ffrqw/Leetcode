@@ -53,3 +53,45 @@ public class Solution {
         connect(root.left);
     }
 }
+
+// v2 better, time consume less than v1
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        
+        // the key is find the right child's next
+        // (if right child doesn't exist, it becomes left child's next)
+        
+        // base case 
+        if(root==null)return;
+        
+        // find the 'right' child's next
+        TreeLinkNode p = root.next;
+        TreeLinkNode next = null;
+        while(p!=null)
+        {
+            if(p.left!=null){
+                next = p.left;
+                break;
+            }else if(p.right!=null){
+                next = p.right;
+                break;
+            }else p = p.next;
+        }
+        if(root.right!=null){
+            root.right.next=next;
+            connect(root.right);
+        }
+        if(root.left!=null){
+            root.left.next= root.right==null?next:root.right;
+            connect(root.left);
+        }
+    }
+}
