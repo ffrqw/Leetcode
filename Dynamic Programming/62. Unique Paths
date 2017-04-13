@@ -1,0 +1,34 @@
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        /*
+        dp
+        the path num of finish is add up by its up & left
+        so we only need to calc its up and left as finish1
+        make dp[m][n] to record the path num of each cell
+        because only right and down, so no overlap
+        */
+        
+        // time m*n
+        // space m*n
+        
+        // base case
+        if(m*n==0)return 0;
+        
+        // construct the dp[][]
+        int[][] dp = new int[m][n];
+        dp[0][0] = 1;
+        
+        // visit every cell, and record its path num
+        for(int i =0;i<m;i++)
+        {
+            for(int j = 0;j<n;j++)
+            {
+                if(i-1>=0)
+                    dp[i][j]+=dp[i-1][j];
+                if(j-1>=0)
+                    dp[i][j]+=dp[i][j-1];
+            }
+        }
+        return dp[m-1][n-1];
+    }
+}
