@@ -1,0 +1,37 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        // use recursion
+        // use a dfs to find its height
+        // then compare the 2 children's height
+        // to determine if fulfill the prob
+        
+        // time :n
+        // space: 1
+        
+        return dfs(root)!=-1;
+    }
+    
+    public int dfs(TreeNode root){
+        
+        // if it's a leaf node
+        if(root==null)return 0;
+        
+        // bottom up
+        int lheight = dfs(root.left);
+        if(lheight==-1)return -1;
+        int rheight = dfs(root.right);
+        if(rheight==-1)return -1;
+        
+        if(Math.abs(lheight-rheight)>1)return -1;
+        return lheight>rheight?lheight+1:rheight+1;
+    }
+}
