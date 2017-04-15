@@ -1,0 +1,43 @@
+public class Solution {
+    public int numIslands(char[][] grid) {
+        
+        // in numIslands, for every cell in 
+        // the grid,check it if it's 0
+        
+        // use dfs() to traverse a island
+        // then mark it as water, once 
+        // return from traverse, #island++
+        
+        int n = grid.length;
+        if(n==0)return 0;
+        int m = grid[0].length;
+        
+        int num = 0;
+        
+        for(int i = 0; i<n;i++)
+        {
+            for(int j = 0; j<m;j++)
+            {
+                if(grid[i][j]=='1')
+                {
+                   dfs(grid,i,j);
+                   num++;                   // once return from traverse, #island++
+                }
+            }
+        }
+        return num;
+    }
+    
+    public void dfs(char[][] grid, int i, int j){
+        
+        // if is leaf node
+        if(i<0||j<0||i>=grid.length||j>=grid[0].length||grid[i][j]=='0')return;     // check limit
+        grid[i][j]='0';
+        
+        dfs(grid,i-1,j);
+        dfs(grid,i+1,j);
+        dfs(grid,i,j-1);
+        dfs(grid,i,j+1);
+        
+    }
+}
