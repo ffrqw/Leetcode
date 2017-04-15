@@ -1,0 +1,47 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        // the root is preorder[0], find preorder[0] in inorder[]
+        // then it seperate the tree in to left and right
+        // cnt the #node in left, the preorder's front # is left, 
+        // the remain is right
+        // this is the simplifier prob
+        
+        // the base case is no left & right child in sepration
+        
+        // time: n/2
+        // space: 1
+        
+        // use a helper to pass index
+        return helper(preorder,0,preorder.length-1,inorder,0,inorder.length-1);
+    }
+    public TreeNode helper(int[] preorder, int ps, int pe, int[] inorder, int is, int ie){
+        // base case
+        if(pe-ps+1<=0)return null;
+        
+        // simplifier
+        TreeNode root = new TreeNode(preorder[ps]);
+        int rootIndex = find(inorder,preorder[ps]);
+        int Lleft = rootIndex - is;
+        int Lright = ie - rootIndex;
+        root.left = helper(preorder, ps+1, ps+Lleft, inorder, is, rootIndex-1);
+        root.right = helper(preorder, ps+Lleft+1, pe, inorder, rootIndex+1, ie);
+        return root;
+    }
+    public int find(int[] inorder, int val){
+        int i = 0;
+        for(; i<inorder.length;i++)
+        {
+            if(inorder[i]==val)break;
+        }
+        return i;
+    }
+}
