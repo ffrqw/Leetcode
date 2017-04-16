@@ -1,0 +1,33 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    
+    public boolean isValidBST(TreeNode root) {
+        // for left tree,
+        // the val of all nodes cannot be bigger than the root,
+        // so there is a max val -> root.val
+        // for right tree,
+        // the val of all nodes cannot be smaller than the root,
+        // so there is a min val -> root.val
+        // use these 2 condition to dfs left tree and right tree
+        
+        if(root==null)return true;
+        return dfs(root,Long.MAX_VALUE,Long.MIN_VALUE);
+    }
+    public boolean dfs(TreeNode root, long max, long min){
+        
+        // base case
+        if(root==null)return true;
+        
+        if(root.val>=max||root.val<=min)return false;
+        
+        return dfs(root.left,root.val,min)&&dfs(root.right,max,root.val);
+    }
+}
