@@ -1,0 +1,41 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    List<Integer> list = new LinkedList<>();
+    public List<Integer> rightSideView(TreeNode root) {
+        // use dfs.
+        // Basically, we need to traverse the whole tree, to check all
+        // nodes we can see. The condition: rightSideView is a piority 
+        // constraint that we should traverse right branch first.
+        // each time we determine if we can "see" the node,(based on the 
+        // level cmp to the result size) then dfs the child, 
+        // meanwhile, use a var level, to determine 
+        // if we can "see" the node. i.e first consider right child, then
+        // left child. 
+        
+        // time n
+        // space n
+        
+        dfs(root,1);
+        return list;
+    }
+    public void dfs(TreeNode root, int lvl){
+        
+        // base case
+        if(root==null)return;
+        
+        if(lvl>list.size())
+        {
+            list.add(root.val);
+        }
+        dfs(root.right,lvl+1);
+        dfs(root.left,lvl+1);
+    }
+}
