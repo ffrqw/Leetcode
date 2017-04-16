@@ -1,0 +1,63 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public TreeNode sortedListToBST(ListNode head){
+        // find the mid node of the list
+        // separate into 2 part
+        // use a dummy node & a prev node
+        // to cut the 1st part
+        // then dfs
+        
+        // time: n
+        // space 1
+        
+        if(head==null)return null;
+        if(head.next==null)return new TreeNode(head.val);
+        if(head.next.next==null)
+        {
+            TreeNode root = new TreeNode(head.val);
+            root.right = new TreeNode(head.next.val);
+            return root;
+        }
+        
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        
+        ListNode prev = dummy;
+        
+        // find mid node
+        ListNode runner = head;
+        ListNode walker = head;
+        
+        while(runner.next!=null&&runner.next.next!=null)
+        {
+            walker = walker.next;
+            prev = prev.next;
+            runner = runner.next.next;
+        }
+        // use walker(mid node) as the root
+        TreeNode root = new TreeNode(walker.val);
+        // separate the first part
+        root.right = sortedListToBST(walker.next);
+        prev.next = null;
+        //System.out.println(prev==null);
+        root.left = sortedListToBST(head);
+        
+        return root;
+    }
+}
