@@ -1,0 +1,63 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        /*
+        recursion
+        use a gentree(s,e)
+        gen a tree from s to e
+        then, root can be from 1 to n, i
+        then, the root's left tree is 1 to i
+        right tree is i+1 to n
+        then use gentree(1,i), gentree(i+1,n) to get
+        the left child node List<> and right child node list<>
+        then, for every node in left tree list<> and right tree list,
+        link them to the root.
+        
+        the base case is :
+        1. s>e, link empty list             // this is for the next step of case 2(when s==e, next s+1>e || s>e-1)
+        2. s==e, return list.add(TreeNode(s));
+        */
+        if(n==0)return new LinkedList<TreeNode>();
+        return genTree(1,n);
+    }
+    public List<TreeNode> genTree(int s, int e){
+        
+        List<TreeNode> list = new LinkedList<>(); 
+        // base case
+        if(s>e)
+        {
+            list.add(null);
+            return list;
+        }
+            
+        if(s==e)
+        {
+            list.add(new TreeNode(s));
+            return list;
+        }
+        // simplifier
+        for(int i = s;i<=e;i++)
+        {
+            List<TreeNode> llist = genTree(s,i-1);
+            List<TreeNode> rlist = genTree(i+1,e);
+            
+            for(TreeNode lnode:llist)
+                for(TreeNode rnode:rlist)
+                {
+                    TreeNode root = new TreeNode(i);
+                    root.left = lnode;
+                    root.right = rnode;
+                    list.add(root);
+                }
+        }
+        return list;
+    }
+}
