@@ -1,0 +1,34 @@
+public class Solution {
+    public String addBinary(String a, String b) {
+       
+       // use carry
+       // just like normal bianry calc but in string
+       
+       StringBuilder ans = new StringBuilder();
+       int i = a.length() - 1;                    // from the LSB
+       int j = b.length() - 1;
+
+       int carry = 0;
+       while(i>=0||j>=0||carry!=0){
+           int sum = 0;
+           if(i>=0){
+            sum=(a.charAt(i)-'0');
+            i--;
+           }
+           if(j>=0){
+            sum+=(b.charAt(j)-'0');
+            j--;
+           }
+           
+           sum+=carry;
+           
+           carry = sum/2;
+           sum = sum%2;
+           
+           ans.append(sum);
+       }
+       // reverse the ans
+       return ans.reverse().toString();
+        
+    }
+}
