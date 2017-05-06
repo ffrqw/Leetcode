@@ -1,0 +1,35 @@
+public class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        // use a hashmap to store the letter of the magazine and its #
+        
+        // time: m+r
+        // space: m
+        
+        Map<Character, Integer> hm = new HashMap<>();
+        
+        // put into hashmap
+        for(char ch : magazine.toCharArray())
+        {
+            if(hm.containsKey(ch))
+            {
+                hm.put(ch,hm.get(ch)+1);
+            }
+            else
+                hm.put(ch,1);
+        }
+        
+        for(char ch: ransomNote.toCharArray())
+        {
+            if(!hm.containsKey(ch))
+                return false;
+            else
+            {
+                if(hm.get(ch)==1)
+                    hm.remove(ch);
+                else
+                    hm.put(ch,hm.get(ch)-1);
+            }
+        }
+        return true;
+    }
+}
