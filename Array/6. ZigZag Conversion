@@ -1,0 +1,39 @@
+  public class Solution {
+    public String convert(String s, int numRows) {
+        /*
+        find the rule
+        123\2 123\2
+        */
+
+        if(numRows==0)return "";
+        if(numRows==1)return s;
+        
+        StringBuffer[] ans = new StringBuffer[numRows];
+        for(int j=0;j<numRows;j++)
+        {
+            ans[j] = new StringBuffer();
+        }
+        String res = "";
+        
+        // use a pointer
+        int i = 0;
+        while(i<s.length())
+        {
+            for(int m = 0;m<numRows&&i<s.length();m++)
+            {
+                ans[m].append(s.charAt(i));
+                i++;
+            }
+            for(int n = numRows-2;n>=1&&i<s.length();n--)
+            {
+                ans[n].append(s.charAt(i));
+                i++;
+            }
+        }
+        for(int j =0;j<numRows;j++)
+        {
+            res+=ans[j].toString();
+        }
+        return res;
+    }
+}
