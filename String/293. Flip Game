@@ -1,0 +1,27 @@
+public class Solution {
+    public List<String> generatePossibleNextMoves(String s) {
+        /*
+        use for to loop the s,
+        if fulfill, add into the list
+        */
+        List<String> list = new LinkedList<>();
+        if(s.length()<2)return list;
+        
+        int p = 1;
+        
+        while(p<s.length())
+        {
+            if(s.charAt(p-1)=='+'&&s.charAt(p)=='+')
+            {
+                // put it into list
+                char[] charr = s.toCharArray();
+                charr[p-1] = '-';
+                charr[p] = '-';
+                
+                list.add(new String(charr));
+            }
+            p++;
+        }
+        return list;
+    }
+}
