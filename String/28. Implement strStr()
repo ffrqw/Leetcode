@@ -1,0 +1,39 @@
+public class Solution {
+    public int strStr(String haystack, String needle) {
+        // brute
+        // 2 pointer, one h, one n
+        // compare if continue, h++, n++
+        // if not, h++, n = 0;
+        // until n=needle.length()-1
+        
+        // time:h*n
+        // no space
+        
+        if(needle.length()==0)return 0;
+    
+        int h = 0,
+            n = 0;
+            
+        for(;h<haystack.length();h++)
+        {
+            if(haystack.length()-h<n) return -1;
+            
+            int h_tmp =h;
+            /*
+            System.out.println();
+            System.out.println("h");
+            System.out.println(h);
+            */
+            for(n=0;n<needle.length();n++)
+            {
+                
+                if(h_tmp<haystack.length()&&needle.charAt(n)==haystack.charAt(h_tmp))
+                    h_tmp++;
+                else
+                    break;
+            }
+            if(n==needle.length()) return h;
+        }
+        return -1;
+    }
+}
