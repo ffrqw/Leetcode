@@ -1,0 +1,45 @@
+public class Solution {
+    public String countAndSay(int n) {
+        // recursion & brute
+        
+        /* 
+        while not the end
+        {
+            read ch, until different
+                cnt it
+            append cnt+ch to ans
+        }
+        */
+        
+        // time: n^2
+        // space: n
+        
+        // base case
+        if(n==1) return "1";
+        
+        // System.out.println("ok");
+        
+        // simplifier
+        String prev = countAndSay(n-1);
+        
+        System.out.println(prev);
+        
+        String ans = "";
+        char tmp = prev.charAt(0);
+        int cnt = 1;
+        
+        for(int i = 1;i<prev.length();i++)
+        {
+            if(prev.charAt(i)!=tmp)
+            {
+                ans = ans+String.valueOf(cnt)+tmp;
+                tmp = prev.charAt(i);
+                cnt=1;
+            }
+            else
+                cnt++;
+        }
+        ans = ans+String.valueOf(cnt)+tmp;
+        return ans;
+    }
+}
