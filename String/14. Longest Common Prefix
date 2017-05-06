@@ -1,0 +1,30 @@
+public class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        
+        if(strs.length==0)return "";
+        // use a String to store the longest prefix
+        StringBuilder ans = new StringBuilder(strs[0]);
+        
+        for(int i = 1;i<strs.length;i++)
+        {   
+            if(strs[i].length()==0||ans.toString()=="")return "";
+            
+            // compare every str to the ans
+            for(int j = 0;j<strs[i].length()&&j<ans.length(); j++ )
+            {   
+                char ch = strs[i].charAt(j);
+                // for each ch in str
+                if(ch!=ans.charAt(j))
+                {
+                    // when meet different, cut ans
+                    ans.setLength(j);
+                    break;
+                }
+                if(ans.length()>strs[i].length())
+                    ans.setLength(strs[i].length());
+            }
+        }
+        return ans.toString();
+        
+    }
+}
