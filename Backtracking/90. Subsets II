@@ -1,0 +1,30 @@
+public class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        // 不要忘了这种细节
+        Arrays.sort(nums);
+        List<List<Integer>> list = new LinkedList<>();
+        // not yet deal with nums.length=0 
+        List<Integer> tmplist = new LinkedList<>();
+        helper(list,nums,0,tmplist);
+        return list;
+    }
+    public void helper(List<List<Integer>> list, int[] nums, int p, List<Integer> tmplist){
+        // 这个判断，很容易错！！！！！
+        if(p<=nums.length)
+        {
+            // !!!!!!!!!!! new!!!
+            list.add(new LinkedList(tmplist));
+        }
+        for(int i = p;i<nums.length;i++)
+        {
+            tmplist.add(nums[i]);
+            // !!!!!!!! 当遇到这种magic function你很想去验证的时候，用一个简单例子去走递归来看看
+            helper(list,nums,i+1,tmplist);
+            tmplist.remove(tmplist.size()-1);
+            
+            // jian zhi
+            // !!!!!!!!!!!!挖掘下一个（上一个）Index时，一定要做越界判断
+            while(i<nums.length-1&&nums[i+1]==nums[i]){i++;}
+        }
+    }
+}
