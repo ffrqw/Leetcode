@@ -1,0 +1,30 @@
+public class Solution {
+    public List<String> generateAbbreviations(String word) {
+        // 想清楚，leaf 和 怎么simplify
+        List<String> list = new LinkedList<>();
+        char[] arr = word.toCharArray();
+        String tmp = "";
+        helper(list,arr,0, 0, tmp);
+        return list;
+    }
+    public void helper(List<String> list, char[] arr, int p, int cnt, String tmp){
+        // leaf
+        if(p==arr.length)
+        {
+            if(cnt>0) tmp+=cnt;
+            list.add(tmp);
+            return;
+        }
+        // simplify
+        
+        // cnt++
+        helper(list,arr,p+1,cnt+1,tmp);
+        // write cnt
+        if(cnt>0)
+        {
+            helper(list,arr,p+1,0,tmp+cnt+arr[p]);
+        }else{
+            helper(list,arr,p+1,0,tmp+arr[p]);
+        }
+    }
+}
