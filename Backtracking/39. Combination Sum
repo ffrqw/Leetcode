@@ -1,0 +1,26 @@
+public class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> list = new LinkedList<>();
+        // corner case
+        if(candidates.length==0) return list;
+        helper(list,new LinkedList<>(), candidates, target, 0);
+        return list;
+    }
+    void helper(List<List<Integer>> list, List<Integer> tmplist, int[] c, int target, int p){
+        // leaf
+        if(target==0)
+        {
+            list.add(new LinkedList(tmplist));
+            return;
+        }
+        if(target<0)return;
+        
+        // simplify
+        for(int i = p;i<c.length;i++)
+        {
+            tmplist.add(c[i]);
+            helper(list,tmplist,c,target-c[i],i);
+            tmplist.remove(tmplist.size()-1);
+        }
+    }
+}
