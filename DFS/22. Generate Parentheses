@@ -1,0 +1,21 @@
+public class Solution {
+    public List<String> generateParenthesis(int n) {
+       List<String> list = new LinkedList<>();
+       if(n==0)return list;
+       dfs(list,"",0,0,n);
+       return list;
+    }
+    public void dfs(List<String> list, String tmp, int open, int close, int n){
+        // leaf
+        if(close==n)
+        {
+            list.add(new String(tmp));
+            return;
+        }
+        // simplify
+        if(open<n)
+            dfs(list,tmp+'(',open+1,close,n);
+        if(close<open)
+            dfs(list,tmp+')',open,close+1,n);
+    }
+}
