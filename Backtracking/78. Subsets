@@ -1,0 +1,20 @@
+public class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> list = new LinkedList<>();
+        if(nums.length==0)return list;
+        helper(list,new LinkedList<>(), nums, 0);
+        return list;
+    }
+    void helper(List<List<Integer>> list, List<Integer> tmplist, int[] nums,int p){
+        // leaf
+        list.add(new LinkedList<>(tmplist));
+        
+        // 想好magic function 的作用究竟是什么，就很简单了~~
+        for(int i = p;i<nums.length;i++)
+        {
+            tmplist.add(nums[i]);
+            helper(list,tmplist,nums,i+1);
+            tmplist.remove(tmplist.size()-1);
+        }
+    }
+}
