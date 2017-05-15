@@ -1,0 +1,33 @@
+public class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> list = new LinkedList<>();
+        if(nums.length==0)return list;
+        
+        List<Integer> num = new LinkedList<>();
+        Arrays.sort(nums);
+        for(int i:nums)
+            num.add(i);
+            
+        helper(list,new LinkedList<>(),num);
+        return list;
+    }
+    void helper(List<List<Integer>> list, List<Integer> tmplist, List<Integer> nums){
+        // leaf
+        if(nums.size()==0)
+        {
+            list.add(new LinkedList<>(tmplist));
+            return;
+        }
+        // simplify
+        for(int i = 0;i<nums.size();i++)
+        {
+            int tmp = nums.get(i);
+            tmplist.add(tmp);
+            nums.remove(i);
+            helper(list,tmplist,nums);
+            nums.add(i,tmp);
+            tmplist.remove(tmplist.size()-1);
+            while(i<nums.size()-1&&nums.get(i+1)==tmp){i++;}
+        }
+    }
+}
