@@ -1,0 +1,30 @@
+public class Solution {
+    public List<String> restoreIpAddresses(String s) {
+    //这题的边界条件特别多~
+        List<String> list = new LinkedList<>();
+        if(s.length()<4||s.length()>12)return list;
+        helper(list,"",4,s,0);
+        return list;
+    }
+    void helper(List<String> list, String tmp, int k,String s,int p){
+        // leaf
+        if(k==0&&p==s.length())
+        {
+            list.add(tmp.substring(0,tmp.length()-1));
+        }
+        // simplify
+        for(int i = p;i<s.length()&&i-p<3;i++)
+        {
+            int digit = i-p+1;
+            int num = Integer.parseInt(s.substring(p,i+1));
+            if(num<0||num>255)continue;
+            if(digit==2&&num<10)continue;
+            if(digit==3&&num<100)continue;
+            
+            int l = tmp.length();
+            tmp = tmp+s.substring(p,i+1)+".";
+            helper(list,tmp,k-1,s,i+1);
+            tmp = tmp.substring(0,l);
+        }
+    }
+}
