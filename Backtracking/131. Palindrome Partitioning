@@ -1,0 +1,34 @@
+public class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> list = new LinkedList<>();
+        if(s.length()==0)return list;
+        helper(list,new LinkedList<>(),s);
+        return list;
+    }
+    void helper(List<List<String>> list,List<String> tmplist,String s){
+        // leaf
+        if(s.length()==0)
+        {
+            list.add(new LinkedList<>(tmplist));
+            return;
+        }
+        // simplify
+        for(int i = 1;i<=s.length();i++)
+        {
+            if(isPali(s.substring(0,i)))
+            {
+                tmplist.add(s.substring(0,i));
+                helper(list,tmplist,s.substring(i));
+                tmplist.remove(tmplist.size()-1);
+            }
+        }
+    }
+    boolean isPali(String s){
+        for(int i = 0;i<s.length()/2;i++)
+        {
+            if(s.charAt(i)!=s.charAt(s.length()-1-i))
+                return false;
+        }
+        return true;
+    }
+}
