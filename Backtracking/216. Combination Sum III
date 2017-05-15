@@ -1,0 +1,29 @@
+public class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> list = new LinkedList<>();
+        
+        if(n>45||n<0)return list;
+        helper(list,new LinkedList<Integer>(),1,k,n);
+        return list;
+    }
+    public void helper(List<List<Integer>> list, List<Integer> tmplist, int p, int k, int n){
+        //leaf
+        if(n==0&&k==0)
+        {
+            list.add(new LinkedList<>(tmplist));
+            return;
+        }
+        if(n<0)return;
+        // simplify
+        for(int i = p;i<=9;i++)
+        {
+            if(n-i>=0)
+            {
+                tmplist.add(i);
+                helper(list,tmplist,i+1,k-1,n-i);
+                tmplist.remove(tmplist.size()-1);
+            }else break;
+            
+        }
+    }
+}
