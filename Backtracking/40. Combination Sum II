@@ -1,0 +1,26 @@
+public class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> list = new LinkedList<>();
+        if(candidates.length==0)return list;
+        Arrays.sort(candidates);
+        helper(list, new LinkedList<>(), target, candidates, 0);
+        return list;
+    }
+    void helper(List<List<Integer>> list, List<Integer> tmplist, int target, int[] c, int p){
+        // leaf
+        if(target==0)
+        {
+            list.add(new LinkedList<>(tmplist));
+            return;
+        }
+        // simplify
+        for(int i = p;i<c.length;i++)
+        {
+            if(target-c[i]<0)break;                   // 这一手就很有灵性， 在进入新递归前的判断，节省资源
+            tmplist.add(c[i]);
+            helper(list,tmplist,target-c[i],c,i+1);
+            tmplist.remove(tmplist.size()-1);
+            while(i<c.length-1&&c[i+1]==c[i])i++;
+        }
+    }
+}
