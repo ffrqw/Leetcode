@@ -1,0 +1,35 @@
+  public class Solution {
+    public List<List<Integer>> getFactors(int n) {
+        List<List<Integer>> list = new LinkedList<>();
+        if(n<2)return list;
+        helper(list, new LinkedList<>(),n,2);
+        return list;
+    }
+    void helper(List<List<Integer>> list, List<Integer> tmplist, int n,int p){
+        // leaf
+        if(n==1)
+        {
+            if(tmplist.size()>1)
+                list.add(new LinkedList<>(tmplist));
+                
+            return;
+        }
+        // simplify
+        for(int i = p;i<=n/2;i++)
+        {
+            if(n%i==0)
+            {
+                tmplist.add(i);
+                helper(list, tmplist,n/i,i);
+                tmplist.remove(tmplist.size()-1);
+            }
+        }
+        if(n>=p)
+        {
+            tmplist.add(n);
+            helper(list,tmplist,1,n);
+            tmplist.remove(tmplist.size()-1);
+        }
+        
+    }
+}
