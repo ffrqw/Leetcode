@@ -1,3 +1,4 @@
+best version:
 public class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
         // can't use p, cuz you don't know if the 
@@ -22,5 +23,27 @@ public class Solution {
         }
         
         return f[s.length()];
+    }
+}
+
+another extremly similar i, j method, but a little bit worse than the best one:
+it reverse the i, j's roles
+
+public class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean[] canReach = new boolean[s.length()+1];
+        canReach[0] = true;
+        for(int i = 0;i<s.length();i++)
+        {
+            for(int j = i;j<=s.length();j++)
+            {
+                if(canReach[i]&&wordDict.contains(s.substring(i,j)))
+                {
+                    canReach[j]=true;
+                }
+            }
+            if(canReach[s.length()]==true)return true;
+        }
+        return canReach[s.length()];
     }
 }
